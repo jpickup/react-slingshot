@@ -6,12 +6,17 @@ jobs:
   build:
     docker:
       - image: circleci/node:13.8.0
+      
     steps:
       - checkout
       - run: npm i
+      - save_cache:
+        key: "npm-packages"
+        paths:
+          - /src/node_modules
       - run: npm run lint
 
 workflows:
-  say-hello-workflow:
+  my-workflow:
     jobs:
       - build
